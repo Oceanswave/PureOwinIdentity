@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PureOwinIdentity", "PureOwinIdentity\PureOwinIdentity.csproj", "{2D0DDDE1-F15F-44A1-88D6-966B698F31C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D5C7FCED-93D2-4C5E-A2FC-B53DE94F500F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PureOwinIdentity.Web", "PureOwinIdentity.Web\PureOwinIdentity.Web.csproj", "{40F141C0-D037-4B14-A2D0-3AF5ACEE3F01}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2D0DDDE1-F15F-44A1-88D6-966B698F31C2} = {2D0DDDE1-F15F-44A1-88D6-966B698F31C2}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D0DDDE1-F15F-44A1-88D6-966B698F31C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D0DDDE1-F15F-44A1-88D6-966B698F31C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D0DDDE1-F15F-44A1-88D6-966B698F31C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D0DDDE1-F15F-44A1-88D6-966B698F31C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F141C0-D037-4B14-A2D0-3AF5ACEE3F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F141C0-D037-4B14-A2D0-3AF5ACEE3F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F141C0-D037-4B14-A2D0-3AF5ACEE3F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F141C0-D037-4B14-A2D0-3AF5ACEE3F01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
