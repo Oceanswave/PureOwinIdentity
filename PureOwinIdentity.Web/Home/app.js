@@ -8,21 +8,10 @@
         url: "/",
         views: {
             "navbar": {
-                templateUrl: "/navbar.html"
+                templateUrl: "/navbar"
             },
             "pageContent": {
-                templateUrl: "/home.html"
-            }
-        }
-    })
-    .state('AboutUs', {
-        url: "/AboutUs",
-        views: {
-            "navbar": {
-                templateUrl: "/StandardNavBar"
-            },
-            "pageContent": {
-                templateUrl: "/AboutUs",
+                templateUrl: "/home"
             }
         }
     })
@@ -30,10 +19,10 @@
         url: "/SignUp",
         views: {
             "navbar": {
-                templateUrl: "/StandardNavBar"
+                templateUrl: "/navbar"
             },
             "pageContent": {
-                templateUrl: "/SignUp",
+                templateUrl: "/signup",
                 controller: "SignUpCtrl"
             }
         }
@@ -42,10 +31,10 @@
         url: "/SignIn",
         views: {
             "navbar": {
-                templateUrl: "/StandardNavBar"
+                templateUrl: "/navbar"
             },
             "pageContent": {
-                templateUrl: "/SignIn",
+                templateUrl: "/signin",
                 controller: "SignInCtrl"
             }
         }
@@ -54,7 +43,7 @@
         url: "/RegisterExternal",
         views: {
             "navbar": {
-                templateUrl: "/StandardNavBar"
+                templateUrl: "/navbar"
             },
             "pageContent": {
                 templateUrl: "/RegisterExternal",
@@ -66,7 +55,7 @@
         url: "/ManageProfile",
         views: {
             "navbar": {
-                templateUrl: "/StandardNavBar"
+                templateUrl: "/navbar"
             },
             "pageContent": {
                 templateUrl: "/ManageProfile",
@@ -74,84 +63,45 @@
             }
         }
     })
-    .state('CreateApp', {
-        url: "/CreateApp",
-        views: {
-            "navbar": {
-                templateUrl: "/StandardNavBar"
-            },
-            "pageContent": {
-                templateUrl: "/CreateApp",
-                controller: "CreateAppCtrl"
-            }
-        }
-    })
-    .state('QuickStart', {
-        url: "/QuickStart",
-        views: {
-            "navbar": {
-                templateUrl: "/StandardNavBar"
-            },
-            "pageContent": {
-                templateUrl: "/QuickStart"
-            }
-        }
-    })
-    .state('Fiddle', {
-        url: "/Fiddle",
-        views: {
-            "navbar": {
-                templateUrl: "/FiddleNavBar",
-                controller: "FiddleNavbarCtrl"
-            },
-            "pageContent": {
-                templateUrl: "/Fiddle",
-                controller: "FiddleCtrl"
-            }
-        }
-    })
     .state('NotFound', {
         url: "/NotFound",
         views: {
             "navbar": {
-                templateUrl: "/StandardNavBar"
+                templateUrl: "/navbar"
             },
             "pageContent": {
                 templateUrl: "/NotFound"
             }
         }
     });
-}]).run(['$rootScope', 'security', '$state', function ($rootScope, security, $state) {
+}])
+    .run(['$rootScope', 'security', '$state', function ($rootScope, security, $state) {
 
-    $rootScope.config = {
-        showFooter: true
-    };
+        $rootScope.config = {
+            showFooter: true
+        };
 
-    $rootScope.$safeApply = function (fn) {
-        var phase = this.$root.$$phase;
-        if (phase == '$apply' || phase == '$digest') {
-            if (fn && (typeof (fn) === 'function')) {
-                fn();
+        $rootScope.$safeApply = function (fn) {
+            var phase = this.$root.$$phase;
+            if (phase == '$apply' || phase == '$digest') {
+                if (fn && (typeof (fn) === 'function')) {
+                    fn();
+                }
+            } else {
+                this.$apply(fn);
             }
-        } else {
-            this.$apply(fn);
-        }
-    };
+        };
 
-    $rootScope.security = security;
+        $rootScope.security = security;
 
-    $rootScope.goHome = function () {
-        $state.go("Home");
-    };
+        $rootScope.goHome = function () {
+            $state.go("Home");
+        };
 
-    $rootScope.getWrapperStyle = function () {
-        return {
-            "margin-bottom": $rootScope.getFooterHeight() * -1,
-            "padding-bottom": $rootScope.getFooterHeight(),
-        }
-    };
-
-    $rootScope.getFooterHeight = function () {
-        return jQuery("#footerWrapper").height();
-    }
-}]);
+        $rootScope.getWrapperStyle = function () {
+            return {
+                "margin-bottom": $rootScope.getFooterHeight() * -1,
+                "padding-bottom": $rootScope.getFooterHeight(),
+            }
+        };
+    }]);

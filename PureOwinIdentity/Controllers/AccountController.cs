@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using System.Web.Http;
-using Microsoft.AspNet.Identity;
-//using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
-
-using IdentityUser = AspNet.Identity.RavenDB.Entities.RavenUser;
-using IdentityUserLogin = AspNet.Identity.RavenDB.Entities.RavenUserLogin;
-
-namespace PureOwinIdentity.Controllers
+﻿namespace PureOwinIdentity.Controllers
 {
-    using System.Linq;
-    using System.Web;
     using global::PureOwinIdentity.Models;
     using global::PureOwinIdentity.PureOwinIdentity;
+    using Microsoft.AspNet.Identity;
+    //using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.Owin.Security;
+    using Microsoft.Owin.Security.Cookies;
+    using Microsoft.Owin.Security.OAuth;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Security.Claims;
+    using System.Security.Cryptography;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Http;
+    using IdentityUser = AspNet.Identity.RavenDB.Entities.RavenUser;
 
     [Authorize]
     [RoutePrefix("api/Account")]

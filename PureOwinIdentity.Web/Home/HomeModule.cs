@@ -11,19 +11,49 @@
                 return View["index.html"];
             };
 
-            Get["/home.html"] = parameters =>
+            Get["/home"] = parameters =>
             {
                 return View["home.html"];
             };
 
-            Get["/navbar.html"] = parameters =>
+            Get["/navbar"] = parameters =>
             {
                 return View["navbar.html"];
+            };
+
+            Get["/signup"] = parameters =>
+            {
+                return View["signup.html"];
+            };
+
+            Get["/signin"] = parameters =>
+            {
+                return View["signin.html"];
             };
 
             Get["/app.js"] = parameters =>
             {
                 return this.ModuleFileResponse("app.js");
+            };
+
+            Get["/signinctrl.js"] = parameters =>
+            {
+                return this.ModuleFileResponse("signinctrl.js");
+            };
+
+            Get["/signupctrl.js"] = parameters =>
+            {
+                return this.ModuleFileResponse("signupctrl.js");
+            };
+
+            Get["/app.js"] = parameters =>
+            {
+                return this.ModuleFileResponse("app.js");
+            };
+
+            Get["/home.css"] = parameters =>
+            {
+                return this.ModuleFileResponse("home.css");
             };
 
             //Components FFA

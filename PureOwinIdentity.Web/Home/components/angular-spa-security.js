@@ -10,9 +10,9 @@
     confirmEmail: '/api/account/confirmEmail',
     userInfo: '/api/account/userInfo',
     changePassword: '/api/account/changePassword',
-    externalLogins: '/api/account/externalLogins',
+    externalLogins: '//localhost:8081/api/account/externalLogins',
     manageInfo: '/api/account/manageInfo',
-    registerExternal: '/api/account/registerExternal',
+    registerExternal: '//localhost:8081/account/registerExternal',
     addExternalLogin: '/api/account/addExternalLogin',
     removeLogin: '/api/account/removeLogin'
 })

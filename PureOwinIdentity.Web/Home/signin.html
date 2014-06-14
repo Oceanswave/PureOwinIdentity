@@ -1,0 +1,76 @@
+﻿<!-- Page tip -->
+<div class="page-tip animated slideInDown">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Please sign in before you proceed. If you are not a member, <a data-ui-sref="SignUp">create an account</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-6">
+            <h3 class="hl top-zero">Sign in to PureOwin Identity</h3>
+            <hr>
+            <p>We support several methods to verify your identity. Sign in to get instant access to all of our features.</p>
+            <!-- Social icons -->
+            <div class="login-social">
+                <span ng-repeat="login in security.externalLogins">
+                    <button class="btn btn-default" ng-click="security.loginWithExternal(login)" data-alt="login.name" data-tooltip-placement="bottom" data-tooltip="{{login.name}}">
+                        <span data-ng-switch="login.name">
+                            <i data-ng-switch-when="Microsoft" class="fa fa-windows fa-4x" style="color: #2672EC"></i>
+                            <i data-ng-switch-when="Twitter" class="fa fa-twitter-square fa-4x" style="color: #30D8F0"></i>
+                            <i data-ng-switch-when="Facebook" class="fa fa-facebook-square fa-4x" style="color: #335795"></i>
+                            <i data-ng-switch-when="Google" class="fa fa-google-plus-square fa-4x" style="color: #D34836"></i>
+                            <i data-ng-switch-when="GitHub" class="fa fa-github-square fa-4x" style="color: #000"></i>
+                            <span data-ng-switch-default="">{{login.name}}</span>
+                        </span>
+                    </button>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- Login Box -->
+        <div class="col-md-4 col-sm-6">
+            <div class="form-box">
+                <h4>Sign In</h4>
+                <hr>
+                <form name="loginForm" role="form" ng-submit="login()">
+                    <div class="form-group">
+                        <label class="sr-only" for="userName">Username</label>
+                        <input type="text" class="form-control" id="userName" ng-minlength="6" ng-required="true" placeholder="Username" data-ng-model="user.username" />
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" ng-minlength="6" ng-required="true" placeholder="Password" data-ng-model="user.password" />
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="rememberMe" data-ng-model="user.rememberMe"> Remember me
+                        </label>
+                    </div>
+                    <div data-ng-show="tokenError != null" style="padding-top: 5px;">
+                        <div class="text-danger">{{tokenError.error_description}}</div>
+                    </div>
+                    <button type="submit" class="hl-btn hl-btn-green" ng-class="{'btn-primary':loginForm.$valid}">Login</button>
+                </form>
+                <hr>
+                <p>Not registered? <a data-ui-sref="SignUp">Create an Account.</a></p>
+                @*<div class="pwd-lost">
+                    <div class="pwd-lost-q show">Lost your password? <a href="#">Click here to recover.</a></div>
+                    <div class="pwd-lost-f hidden">
+                        <p class="text-muted">Enter your email address and we will send you a link to reset your password.</p>
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="sr-only" for="email-pwd">Email address</label>
+                                <input type="email" class="form-control" id="email-pwd" placeholder="Enter email">
+                            </div>
+                            <button type="submit" class="hl-btn hl-btn-blue">Send</button>
+                        </form>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>

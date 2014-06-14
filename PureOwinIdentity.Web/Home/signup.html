@@ -1,0 +1,65 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" ng-show="message == null">
+            <h2>Sign Up</h2>
+            <form name="externalLoginsForm" class="form-horizontal" role="form">
+                <!-- Social icons -->
+                <div class="login-social">
+                    <span ng-repeat="login in security.externalLogins">
+                        <button class="btn btn-default" ng-click="security.loginWithExternal(login)" data-alt="login.name" data-tooltip-placement="bottom" data-tooltip="{{login.name}}">
+                            <span data-ng-switch="login.name">
+                                <i data-ng-switch-when="Microsoft" class="fa fa-windows fa-4x" style="color: #2672EC"></i>
+                                <i data-ng-switch-when="Twitter" class="fa fa-twitter-square fa-4x" style="color: #30D8F0"></i>
+                                <i data-ng-switch-when="Facebook" class="fa fa-facebook-square fa-4x" style="color: #335795"></i>
+                                <i data-ng-switch-when="Google" class="fa fa-google-plus-square fa-4x" style="color: #D34836"></i>
+                                <i data-ng-switch-when="GitHub" class="fa fa-github-square fa-4x" style="color: #000"></i>
+                                <span data-ng-switch-default="">{{login.name}}</span>
+                            </span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            <div class="seperator">
+                <span>or</span>
+            </div>
+            <form name="signUpForm" class="form-horizontal" role="form" ng-submit="join()">
+                <div class="form-group">
+                    <label for="userName" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="userName" ng-minlength="6" ng-required="true" placeholder="Username" data-ng-model="user.username" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-6">
+                        <input type="email" class="form-control" id="email" ng-required="true" placeholder="Email" data-ng-model="user.email" />
+                    </div>
+                </div>
+                <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="password" name="password" ng-minlength="6" ng-required="true" placeholder="Password" data-ng-model="user.password" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword" class="col-sm-2 control-label">Confirm Password</label>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-minlength="6" ng-required="true" placeholder="Confirm Password" data-ng-model="user.confirmPassword" data-ui-validate=" '$value==user.password' " data-ui-validate-watch=" 'user.password' " />
+                        <span class="text-danger" ng-show='signUpForm.confirmPassword.$error.validator'>Passwords do not match!</span>
+                    </div>
+                </div>
+                <div data-ng-show="registrationState != null" ng-repeat="message in registrationState.messages" style="padding-top: 5px;">
+                    <div class="text-danger">{{message}}</div>
+                </div>
+                <button type="submit" class="btn btn-default btn-lg btn-block" ng-class="{'btn-primary':signUpForm.$valid}">Sign Up</button>
+            </form>
+            <p class="small text-muted gutter-top text-center">Already have an account? <a data-ui-sref="SignIn">Sign In Now!</a></p>
+            By clicking "Sign Up" I agree to the Terms of Service and Privacy Policy.
+        </div>
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" ng-hide="message == null">
+            <p class="lead" ng-bind="message"></p>
+        </div>
+    </div>
+</div>
