@@ -1,10 +1,10 @@
 ﻿angular.module('app')
-.controller('RegisterExternalCtrl', ['$scope', 'security', function ($scope, Security) {
+.controller('RegisterExternalCtrl', ['$scope', 'security', function ($scope, security) {
 
-    if (!Security.externalUser)
-        Security.authenticate();
+    if (!security.externalUser)
+        security.authenticate();
 
-    Security.redirectAuthenticated('/');
+    security.redirectAuthenticated('/');
 
     $scope.registrationState = null;
 
@@ -15,7 +15,7 @@
         $scope.registrationState = null;
 
         $scope.message = "Processing Login...";
-        Security.registerExternal().then(function() {
+        security.registerExternal().then(function() {
             //Succeeded.
             $scope.message = null;
         }, function (data) {

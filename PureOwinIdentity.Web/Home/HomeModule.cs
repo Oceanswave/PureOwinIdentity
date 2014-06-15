@@ -7,6 +7,7 @@
     {
         public HomeModule()
         {
+            //Views
             Get["/"] = parameters => {
                 return View["index.html"];
             };
@@ -36,9 +37,20 @@
                 return View["registerexternal.html"];
             };
 
+            Get["/ManageProfile"] = parameters =>
+            {
+                return View["ManageProfile.html"];
+            };
+
+            //Scripts
             Get["/app.js"] = parameters =>
             {
                 return this.ModuleFileResponse("app.js");
+            };
+
+            Get["/HomeCtrl.js"] = parameters =>
+            {
+                return this.ModuleFileResponse("HomeCtrl.js");
             };
 
             Get["/signinctrl.js"] = parameters =>
@@ -55,6 +67,13 @@
             {
                 return this.ModuleFileResponse("registerexternalctrl.js");
             };
+
+            Get["/ManageProfileCtrl.js"] = parameters =>
+            {
+                return this.ModuleFileResponse("ManageProfileCtrl.js");
+            };
+
+            //CSS
 
             Get["/home.css"] = parameters =>
             {

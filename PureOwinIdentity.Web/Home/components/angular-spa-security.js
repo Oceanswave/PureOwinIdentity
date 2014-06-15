@@ -11,7 +11,7 @@
     userInfo: '//localhost:8081/api/account/userInfo',
     changePassword: '/api/account/changePassword',
     externalLogins: '//localhost:8081/api/account/externalLogins',
-    manageInfo: '/api/account/manageInfo',
+    manageInfo: '//localhost:8081/api/account/manageInfo',
     registerExternal: '//localhost:8081/api/account/registerExternal',
     addExternalLogin: '/api/account/addExternalLogin',
     removeLogin: '/api/account/removeLogin'
@@ -411,7 +411,7 @@
             return deferred.promise;
         };
 
-        security.mangeInfo = function () {
+        security.manageInfo = function () {
             var deferred = $q.defer();
 
             api.manageInfo().success(function (manageInfo) {
