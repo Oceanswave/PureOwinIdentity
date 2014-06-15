@@ -101,16 +101,11 @@
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            IHttpActionResult errorResult = GetErrorResult(result);
+            var errorResult = GetErrorResult(result);
 
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            return errorResult ?? Ok();
         }
 
         // POST api/Account/SetPassword
@@ -125,12 +120,7 @@
             var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
             var errorResult = GetErrorResult(result);
 
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            return errorResult ?? Ok();
         }
 
         // POST api/Account/AddExternalLogin
@@ -195,7 +185,7 @@
         }
 
         // GET api/Account/ExternalLogin
-        [OverrideAuthentication]
+        //[OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
         [Route("ExternalLogin", Name = "ExternalLogin")]
@@ -268,17 +258,20 @@
                 state = null;
             }
 
-            return descriptions.Select(description => new ExternalLoginViewModel
+            var result = descriptions.Select(description => new ExternalLoginViewModel
             {
                 Name = description.Caption,
-                Url = Url.Route("ExternalLogin", new
+                Url = Url.Request.RequestUri.Scheme + "://" + Url.Request.RequestUri.Host + ":" + Url.Request.RequestUri.Port + Url.Route("ExternalLogin", new
                 {
                     provider = description.AuthenticationType, response_type = "token",
-                    client_id = AppBuilderExtensions.PublicClientId, redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                    client_id = AppBuilderExtensions.PublicClientId,
+                    redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
                     state
                 }),
                 State = state
             }).ToList();
+
+            return result;
         }
 
         // POST api/Account/Register
@@ -293,15 +286,10 @@
 
             var user = new IdentityUser(model.UserName, model.Email);
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-            IHttpActionResult errorResult = GetErrorResult(result);
+            var result = await UserManager.CreateAsync(user, model.Password);
+            var errorResult = GetErrorResult(result);
 
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
-
-            return Ok();
+            return errorResult ?? Ok();
         }
 
         // POST api/Account/RegisterExternal
@@ -322,12 +310,19 @@
                 return InternalServerError();
             }
 
-            var user = new IdentityUser(model.UserName, model.Email);
+            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
-            await UserManager.AddLoginAsync(model.UserName,
+            if (user == null)
+            {
+                user = new IdentityUser(model.UserName, model.Email);
+                var createResult = await UserManager.CreateAsync(user);
+                if (createResult.Succeeded == false)
+                    return GetErrorResult(createResult);
+            }
+
+            var result = await UserManager.AddLoginAsync(user.Id,
                 new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
-            var result = await UserManager.CreateAsync(user);
             var errorResult = GetErrorResult(result);
 
             return errorResult ?? Ok();
@@ -357,26 +352,24 @@
                 return InternalServerError();
             }
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
+                return null;
+
+            if (result.Errors != null)
             {
-                if (result.Errors != null)
+                foreach (string error in result.Errors)
                 {
-                    foreach (string error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
+                    ModelState.AddModelError("", error);
                 }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return BadRequest();
-                }
-
-                return BadRequest(ModelState);
             }
 
-            return null;
+            if (ModelState.IsValid)
+            {
+                // No ModelState errors are available to send, so just return an empty BadRequest.
+                return BadRequest();
+            }
+
+            return BadRequest(ModelState);
         }
 
         private class ExternalLoginData

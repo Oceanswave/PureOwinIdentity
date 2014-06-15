@@ -31,6 +31,11 @@
                 return View["signin.html"];
             };
 
+            Get["/registerexternal"] = parameters =>
+            {
+                return View["registerexternal.html"];
+            };
+
             Get["/app.js"] = parameters =>
             {
                 return this.ModuleFileResponse("app.js");
@@ -46,9 +51,9 @@
                 return this.ModuleFileResponse("signupctrl.js");
             };
 
-            Get["/app.js"] = parameters =>
+            Get["/registerexternalctrl.js"] = parameters =>
             {
-                return this.ModuleFileResponse("app.js");
+                return this.ModuleFileResponse("registerexternalctrl.js");
             };
 
             Get["/home.css"] = parameters =>

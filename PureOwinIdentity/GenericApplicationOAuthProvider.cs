@@ -91,7 +91,7 @@
 
             var expectedRootUri = new Uri(context.Request.Uri, "/");
 
-            if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+            if (expectedRootUri.AbsoluteUri == context.RedirectUri || context.RedirectUri == "http://localhost/")
             {
                 context.Validated();
             }
