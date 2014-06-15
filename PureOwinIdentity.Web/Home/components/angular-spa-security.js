@@ -4,7 +4,7 @@
     manage: '/manage',
     join: '//localhost:8081/api/account/register',
     login: '//localhost:8081/token',
-    logout: '/api/account/logout',
+    logout: '//localhost:8081/api/account/logout',
     forgotPassword: '/api/account/forgotpassword',
     resetPassword: '/api/account/resetpassword',
     confirmEmail: '/api/account/confirmEmail',
@@ -103,7 +103,7 @@
     securityProvider.states = {
         login: 'SignUp',
         registerExternal: 'RegisterExternal',
-        postLogout: 'SignUp',
+        postLogout: 'Home',
         home: 'Home'
     };
     securityProvider.apiUrls = apiUrls;
