@@ -1,20 +1,20 @@
 ﻿angular.module('security', ['ngRoute'])
 .constant('security.urls', {
     site: 'http://localhost:80/',
-    manage: '/manage',
+    manage: '//localhost:8081/manage',
     join: '//localhost:8081/api/account/register',
     login: '//localhost:8081/token',
     logout: '//localhost:8081/api/account/logout',
-    forgotPassword: '/api/account/forgotpassword',
-    resetPassword: '/api/account/resetpassword',
-    confirmEmail: '/api/account/confirmEmail',
+    forgotPassword: '//localhost:8081/api/account/forgotpassword',
+    resetPassword: '//localhost:8081/api/account/resetpassword',
+    confirmEmail: '//localhost:8081/api/account/confirmEmail',
     userInfo: '//localhost:8081/api/account/userInfo',
-    changePassword: '/api/account/changePassword',
+    changePassword: '//localhost:8081/api/account/changePassword',
     externalLogins: '//localhost:8081/api/account/externalLogins',
     manageInfo: '//localhost:8081/api/account/manageInfo',
     registerExternal: '//localhost:8081/api/account/registerExternal',
-    addExternalLogin: '/api/account/addExternalLogin',
-    removeLogin: '/api/account/removeLogin'
+    addExternalLogin: '//localhost:8081/api/account/addExternalLogin',
+    removeLogin: '//localhost:8081/api/account/removeLogin'
 })
 .factory('security.api', ['$http', 'security.urls', function ($http, apiUrls) {
     //Parameterize - Necessary for funky login expectations...
